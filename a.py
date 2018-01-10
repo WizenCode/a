@@ -214,22 +214,19 @@ def all_commands(m):
     userid = m.from_user.id
     chatid = m.chat.id
     chattype = m.chat.type
+    wordd = m.text.split()[1]
     isadmin = str(redis.sismember("group-{}".format(chatid) , "{}".format(userid)))
     isadded = str(redis.sismember("groups" , "{}".format(chatid)))
-    if text.startswith("/remfilter "):
-        w = text.replace("/remfilter " , "")
-    elif text.startswith("/addfilter "):
-        w = text.replace("/addfilter " , "")
-    isword = str(redis.sismember("filter-{}".format(chatid) , w))
+    isword = str(redis.sismember("filter-{}".format(chatid) , wordd))
     if chattype == "supergroup" and isadded=="True" and userid in sudos or isadmin=="True":
         if text.startswith("/addfilter ") and isword=="False":
-            redis.sadd("filter-{}".format(chatid) , w)
+            redis.sadd("filter-{}".format(chatid) , wordd)
             bot.send_message(chatid , "🍃عبارت {} با موفقیت به لیست عبارات غیرمجازی افزوده شد!".format(w))
         else:
             bot.send_message(chatid , "🍃عبارت مورد نظر از قبل در لیست موجود بود!")
 
         if text.startswith("/remfilter ") and isword=="True":
-            redis.srem("filter-{}".format(chatid) , w)
+            redis.srem("filter-{}".format(chatid) , wordd)
             bot.send_message(chatid , "🍂عبارت {} با موفقیت از لیست عبارات غیرمجازی حذف گردید!".format(w))
         else:
             bot.send_message(chatid , "🍂عبارت مورد نظر از قبل در لیست موجود نبود!")
