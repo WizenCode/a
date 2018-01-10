@@ -19,7 +19,7 @@ from urllib import urlretrieve as download
 reload(sys)
 sys.setdefaultencoding("utf-8")
 ################################################################################
-api_token = "524110905:AAFDn4g3MS8vVPsp1T6-2YW84CLk6znQPXI" #Token must be here...
+api_token = "537291794:AAG_tDi9ja-o9KzHUKLSDV4wBqm_-FQIUL4" #Token must be here...
 sudos = [
     478026278,
     0
@@ -75,7 +75,7 @@ def starting(m):
 
 📌جهت فعالسازی ربات باید از طریق [درگاه پرداخت ما]({}) ربات را خریداری کرده و با گرفتن اسکرین شات از فاکتور پرداخت خود ، آن را در [چت خصوصی مدیر](https://telegram.me/{}) ربات ارسال کنید!
 _🌹لینک گروه خود را نیز در همان چت ارسال نمایید._
-""".format(bot.get_me().first_name , payment_link , sudo_username) , parse_mode="Markdown" , reply_markup=markup)
+""".format(bot.get_me().first_name , payment_link , sudo_username) , parse_mode="Markdown" , reply_markup=markup , disable_web_page_preview=False)
 #######################################################################################################################################################################
 @bot.message_handler(commands=['ping'])
 def ping(m):
@@ -207,29 +207,6 @@ def kickme(m):
         bot.send_message(chatid , "🍃کاربر {} به دستور خود در {} ثانیه اینده اخراج خواهد شد!".format(userid , seconds))
         time.sleep(seconds)
         bot.kick_chat_member(chatid , userid)
-#######################################################################################################################################################################
-@bot.message_handler(content_types=['text'])
-def all_commands(m):
-    text = m.text
-    userid = m.from_user.id
-    chatid = m.chat.id
-    chattype = m.chat.type
-    wordd = m.text.split()[1]
-    isadmin = str(redis.sismember("group-{}".format(chatid) , "{}".format(userid)))
-    isadded = str(redis.sismember("groups" , "{}".format(chatid)))
-    isword = str(redis.sismember("filter-{}".format(chatid) , wordd))
-    if chattype == "supergroup" and isadded=="True" and userid in sudos or isadmin=="True":
-        if text.startswith("/addfilter ") and isword=="False":
-            redis.sadd("filter-{}".format(chatid) , wordd)
-            bot.send_message(chatid , "🍃عبارت {} با موفقیت به لیست عبارات غیرمجازی افزوده شد!".format(w))
-        else:
-            bot.send_message(chatid , "🍃عبارت مورد نظر از قبل در لیست موجود بود!")
-
-        if text.startswith("/remfilter ") and isword=="True":
-            redis.srem("filter-{}".format(chatid) , wordd)
-            bot.send_message(chatid , "🍂عبارت {} با موفقیت از لیست عبارات غیرمجازی حذف گردید!".format(w))
-        else:
-            bot.send_message(chatid , "🍂عبارت مورد نظر از قبل در لیست موجود نبود!")
 #######################################################################################################################################################################
 @bot.message_handler(commands=['filterlist'])
 def filterlist(m):
