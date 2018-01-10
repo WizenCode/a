@@ -220,7 +220,7 @@ def all_commands(m):
         w = text.replace("/remfilter " , "")
     elif text.startswith("/addfilter "):
         w = text.replace("/addfilter " , "")
-    isword = str(redis.sismember("filter-{}".format(chatid) , word))
+    isword = str(redis.sismember("filter-{}".format(chatid) , w))
     if chattype == "supergroup" and isadded=="True" and userid in sudos or isadmin=="True":
         if text.startswith("/addfilter ") and isword=="False":
             redis.sadd("filter-{}".format(chatid) , w)
