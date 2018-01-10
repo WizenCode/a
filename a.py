@@ -216,12 +216,11 @@ def all_commands(m):
     chattype = m.chat.type
     isadmin = str(redis.sismember("group-{}".format(chatid) , "{}".format(userid)))
     isadded = str(redis.sismember("groups" , "{}".format(chatid)))
-    isword = str(redis.sismember("filter-{}".format(chatid) , word))
     if text.startswith("/remfilter "):
         w = text.replace("/remfilter " , "")
     elif text.startswith("/addfilter "):
         w = text.replace("/addfilter " , "")
-
+    isword = str(redis.sismember("filter-{}".format(chatid) , word))
     if chattype == "supergroup" and isadded=="True" and userid in sudos or isadmin=="True":
         if text.startswith("/addfilter ") and isword=="False":
             redis.sadd("filter-{}".format(chatid) , w)
