@@ -169,7 +169,7 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if groups=="True":
         if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
-            if lockphoto(chatid)!="True":
+            if lockphoto(chatid)=="UNLOCKED":
                 redis.sadd("photo".chatid)
                 bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
             else:
