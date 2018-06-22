@@ -154,8 +154,13 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            bot.send_message(chatid , """*⌥ PHOTO : {}
-*""".format(lockphoto(chatid)) , parse_mode="Markdown")
+            bot.send_message(chatid , """⌥ PHOTO : {}
+⌥ VIDEO : {}
+⌥ STICKER : {}
+⌥ GAME : {}
+⌥ LOCATION : {}
+⌥ LINK : {}
+""".format(lockphoto(chatid),lockvideo(chatid) , locksticker(chatid) , lockgame(chatid) , locklocation(chatid) , locklink(chatid)) , parse_mode="Markdown")
     else:
         bot.send_message(chatid , "*⌥ You are not admin or chat is not a supergroup!*" , parse_mode="Markdown")
 #######################################################################################################################################################################
