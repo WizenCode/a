@@ -154,20 +154,20 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            bot.send_message(chatid , """➥All : `{}`
-➥Text : `{}`
-➥Photo : `{}`
-➥Sticker : `{}`
-➥Video : `{}`
-➥Audio : `{}`
-➥Gif : `{}`
-➥Game : `{}`
-➥TGServices : `{}`
-➥Link : `{}`
-➥Forward : `{}`
-➥VideoNote : `{}`
-➥Voice : `{}`
-➥Document : `{}`""".format(lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid)) , parse_mode="Markdown")
+            bot.send_message(chatid , """➥All : `{0}`
+➥Text : `{1}`
+➥Photo : `{2}`
+➥Sticker : `{3}`
+➥Video : `{4}`
+➥Audio : `{5}`
+➥Gif : `{6}`
+➥Game : `{7}`
+➥TGServices : `{8}`
+➥Link : `{9}`
+➥Forward : `{10}`
+➥VideoNote : `{11}`
+➥Voice : `{12}`
+➥Document : `{13}`""".format(lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid)) , parse_mode="Markdown")
     else:
         bot.send_message(chatid , "*⌥ You are not admin or chat is not a supergroup!*" , parse_mode="Markdown")
 #######################################################################################################################################################################
