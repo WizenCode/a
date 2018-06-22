@@ -167,7 +167,7 @@ def add(m):
     chatid = m.chat.id
     chat = m.chat.type
     text = m.text
-    name = text.replace("/lock ","")
+    name = text.replace("lock ","")
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if groups=="True":
         if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
