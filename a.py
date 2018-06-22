@@ -176,7 +176,7 @@ def lphoto(m):
                 bot.send_message(chatid , "⌥ Lock photo is already enabled!" , "markdown")
             else:
                 redis.sadd("photo" , chatid)
-                bot.send_message(chatid , "⌥ Lock photo is already enabled!" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo enabled!" , "markdown")
 #######################################################################################################################################################################
 @bot.message_handler(commands=['uphoto'])
 def lphoto(m):
@@ -190,6 +190,7 @@ def lphoto(m):
                 bot.send_message(chatid , "⌥ Lock photo is already disabled!" , "markdown")
             else:
                 redis.srem("photo" , chatid)
+                bot.send_message(chatid , "⌥ Lock photo disabled!" , "markdown")
 #######################################################################################################################################################################
 #######################################################################################################################################################################
 #######################################################################################################################################################################
