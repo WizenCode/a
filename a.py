@@ -46,11 +46,6 @@ def locktext(m):
         return "LOCKED"
     else:
         return "UNLOCKED"
-def lockgif(m):
-    if str(redis.sismember("gif" , m))=="True":
-        return "LOCKED"
-    else:
-        return "UNLOCKED"
 def locksticker(m):
     if str(redis.sismember("sticker" , m))=="True":
         return "LOCKED"
@@ -279,7 +274,7 @@ def lphoto(m):
                 redis.srem("sticker" , chatid)
                 bot.send_message(chatid , "⌥ Lock sticker disabled!" , "markdown")
 #######################################################################################################################################################################
-@bot.message_handler(commands=['lgif'])
+@bot.message_handler(commands=['ltext'])
 def lphoto(m):
     userid = m.from_user.id
     chatid = m.chat.id
@@ -287,13 +282,13 @@ def lphoto(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            if lockgif(chatid)=="LOCKED":
-                bot.send_message(chatid , "⌥ Lock gif is already enabled!" , "markdown")
+            if locktext(chatid)=="LOCKED":
+                bot.send_message(chatid , "⌥ Lock text is already enabled!" , "markdown")
             else:
-                redis.sadd("gif" , chatid)
-                bot.send_message(chatid , "⌥ Lock gif enabled!" , "markdown")
+                redis.sadd("text" , chatid)
+                bot.send_message(chatid , "⌥ Lock text enabled!" , "markdown")
 #######################################################################################################################################################################
-@bot.message_handler(commands=['ugif'])
+@bot.message_handler(commands=['utext'])
 def lphoto(m):
     userid = m.from_user.id
     chatid = m.chat.id
@@ -301,11 +296,11 @@ def lphoto(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            if lockgif(chatid)=="UNLOCKED":
-                bot.send_message(chatid , "⌥ Lock gif is already disabled!" , "markdown")
+            if locktext(chatid)=="UNLOCKED":
+                bot.send_message(chatid , "⌥ Lock text is already disabled!" , "markdown")
             else:
-                redis.srem("gif" , chatid)
-                bot.send_message(chatid , "⌥ Lock gif disabled!" , "markdown")
+                redis.srem("text" , chatid)
+                bot.send_message(chatid , "⌥ Lock text disabled!" , "markdown")
 #######################################################################################################################################################################
 #######################################################################################################################################################################
 #######################################################################################################################################################################
@@ -359,7 +354,7 @@ def photolock(m):
                     print "Admin bood baw"
                 else:
                     bot.delete_message(chatid , mesid)
-@bot.message_handler(content_types=['video_note'])
+@bot.message_handler(content_types=['text'])
 def photolock(m):
     userid = m.from_user.id
     chatid = m.chat.id
@@ -368,7 +363,7 @@ def photolock(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if chat=="supergroup":
         if groups=="True":
-            if lockgif(chatid)=="LOCKED":
+            if locktext(chatid)=="LOCKED":
                 if userid in sudos or bot.get_chat_member(chatid , userid).status!="member":
                     print "Admin bood baw"
                 else:
