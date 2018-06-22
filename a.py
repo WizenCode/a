@@ -154,13 +154,13 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            bot.send_message(chatid , """⌥ Photo : <code>{}</code>
-⌥ Video : <code>{}</code>
-⌥ Sticker : <code>{}</code>
-⌥ Game : <code>{}</code>
-⌥ Location : <code>{}</code>
-⌥ Link : <code>{}</code>
-""".format(lockphoto(chatid),lockvideo(chatid) , locksticker(chatid) , lockgame(chatid) , locklocation(chatid) , locklink(chatid)) , parse_mode="HTML")
+            bot.send_message(chatid , """⌥ Photo : `{}`
+⌥ Video : `{}`
+⌥ Sticker : `{}`
+⌥ Game : `{}`
+⌥ Location : `{}`
+⌥ Link : `{}`
+""".format(lockphoto(chatid),lockvideo(chatid) , locksticker(chatid) , lockgame(chatid) , locklocation(chatid) , locklink(chatid)) , parse_mode="Markdown")
     else:
         bot.send_message(chatid , "*⌥ You are not admin or chat is not a supergroup!*" , parse_mode="Markdown")
 #######################################################################################################################################################################
@@ -177,6 +177,7 @@ def lphoto(m):
             else:
                 redis.sadd("photo" , chatid)
                 bot.send_message(chatid , "⌥ Lock photo enabled!" , "markdown")
+#######################################################################################################################################################################
 @bot.message_handler(commands=['uphoto'])
 def lphoto(m):
     userid = m.from_user.id
@@ -190,33 +191,6 @@ def lphoto(m):
             else:
                 redis.srem("photo" , chatid)
                 bot.send_message(chatid , "⌥ Lock photo disabled!" , "markdown")
-#######################################################################################################################################################################
-@bot.message_handler(commands=['lvideo'])
-def lphoto(m):
-    userid = m.from_user.id
-    chatid = m.chat.id
-    chat = m.chat.type
-    groups = str(redis.sismember("groups" , "{}".format(chatid)))
-    if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
-        if groups=="True":
-            if lockvideo(chatid)=="LOCKED":
-                bot.send_message(chatid , "⌥ Lock video is already enabled!" , "markdown")
-            else:
-                redis.sadd("video" , chatid)
-                bot.send_message(chatid , "⌥ Lock video enabled!" , "markdown")
-@bot.message_handler(commands=['uvideo'])
-def lphoto(m):
-    userid = m.from_user.id
-    chatid = m.chat.id
-    chat = m.chat.type
-    groups = str(redis.sismember("groups" , "{}".format(chatid)))
-    if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
-        if groups=="True":
-            if lockvideo(chatid)=="UNLOCKED":
-                bot.send_message(chatid , "⌥ Lock video is already disabled!" , "markdown")
-            else:
-                redis.srem("video" , chatid)
-                bot.send_message(chatid , "⌥ Lock video disabled!" , "markdown")
 #######################################################################################################################################################################
 #######################################################################################################################################################################
 #######################################################################################################################################################################
@@ -241,20 +215,6 @@ def photolock(m):
     if chat=="supergroup":
         if groups=="True":
             if lockphoto(chatid)=="LOCKED":
-                if userid in sudos or bot.get_chat_member(chatid , userid).status!="member":
-                    print "Admin bood baw"
-                else:
-                    bot.delete_message(chatid , mesid)
-@bot.message_handler(content_types=['video'])
-def photolock(m):
-    userid = m.from_user.id
-    chatid = m.chat.id
-    chat = m.chat.type
-    mesid = m.message_id
-    groups = str(redis.sismember("groups" , "{}".format(chatid)))
-    if chat=="supergroup":
-        if groups=="True":
-            if lockvideo(chatid)=="LOCKED":
                 if userid in sudos or bot.get_chat_member(chatid , userid).status!="member":
                     print "Admin bood baw"
                 else:
