@@ -91,6 +91,7 @@ def starting(m):
     link = types.InlineKeyboardButton(text="⌥ C H A N N E L" , url="https://t.me/kingtgteam")
     link2 = types.InlineKeyboardButton(text="⌥ Add To Group" , url="https://t.me/"+bot.get_me().username+"?startgroup=new")
     markup.add(link)
+    markup.add(link2)
     bot.send_message( chatid , """⌥ Welcome to KING api bot...
 ```
 > You can use king online for free
