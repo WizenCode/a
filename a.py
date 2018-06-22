@@ -154,20 +154,8 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            bot.send_message(chatid , """➥All : {}
-➥Text : {}
-➥Photo : {}
-➥Sticker : {}
-➥Video : {}
-➥Audio : {}
-➥Gif : {}
-➥Game : {}
-➥TGServices : {}
-➥Link : {}
-➥Forward : {}
-➥VideoNote : {}
-➥Voice : {}
-➥Document : {}""".format(lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid)) , parse_mode="Markdown")
+            bot.send_message(chatid , """*⌥ PHOTO : {}
+*""".format(lockphoto(chatid)) , parse_mode="Markdown")
     else:
         bot.send_message(chatid , "*⌥ You are not admin or chat is not a supergroup!*" , parse_mode="Markdown")
 #######################################################################################################################################################################
@@ -183,7 +171,7 @@ def lphoto(m):
                 bot.send_message(chatid , "⌥ Lock photo is already enabled!" , "markdown")
             else:
                 redis.sadd("photo" , chatid)
-                bot.send_message(chatid , "⌥ Lock photo enabled!" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo is already enabled!" , "markdown")
 #######################################################################################################################################################################
 @bot.message_handler(commands=['uphoto'])
 def lphoto(m):
@@ -197,7 +185,6 @@ def lphoto(m):
                 bot.send_message(chatid , "⌥ Lock photo is already disabled!" , "markdown")
             else:
                 redis.srem("photo" , chatid)
-                bot.send_message(chatid , "⌥ Lock photo disabled!" , "markdown")
 #######################################################################################################################################################################
 #######################################################################################################################################################################
 #######################################################################################################################################################################
