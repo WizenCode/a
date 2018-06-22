@@ -166,40 +166,40 @@ def add(m):
     userid = m.from_user.id
     chatid = m.chat.id
     chat = m.chat.type
-    which = m.text.replace('/lock ','')
+    text = m.text.replace("/lock ","")
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if groups=="True":
         if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
 ################################################################################
-            if which=="photo":
+            if text=="photo":
                 if lockphoto(chatid)!="True":
                     redis.sadd("photo".chatid)
                     bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
                 else:
                     bot.send_message(chatid , "*⌥ Lock [ {} ] is alreay enabled!*".format(which) , "Markdown")
 ################################################################################
-            if which=="text":
+            if text=="text":
                 if locktext(chatid)!="True":
                     redis.sadd("text".chatid)
                     bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
                 else:
                     bot.send_message(chatid , "*⌥ Lock [ {} ] is alreay enabled!*".format(which) , "Markdown")
 ################################################################################
-            if which=="video":
+            if text=="video":
                 if lockvideo(chatid)!="True":
                     redis.sadd("video".chatid)
                     bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
                 else:
                     bot.send_message(chatid , "*⌥ Lock [ {} ] is alreay enabled!*".format(which) , "Markdown")
 ################################################################################
-            if which=="voice":
+            if text=="voice":
                 if lockvoice(chatid)!="True":
                     redis.sadd("voice".chatid)
                     bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
                 else:
                     bot.send_message(chatid , "*⌥ Lock [ {} ] is alreay enabled!*".format(which) , "Markdown")
 ################################################################################
-            if which=="game":
+            if text=="game":
                 if lockgame(chatid)!="True":
                     redis.sadd("game".chatid)
                     bot.send_message(chatid , "*⌥ Lock [ {} ] enabled.*".format(which) , "Markdown")
