@@ -359,7 +359,7 @@ def photolock(m):
                     print "Admin bood baw"
                 else:
                     bot.delete_message(chatid , mesid)
-@bot.message_handler(content_types=['gif'])
+@bot.message_handler(content_types=['video_note'])
 def photolock(m):
     userid = m.from_user.id
     chatid = m.chat.id
