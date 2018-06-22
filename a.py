@@ -91,7 +91,7 @@ def starting(m):
     link = types.InlineKeyboardButton(text="⌥ C H A N N E L" , url="https://t.me/kingtgteam")
     markup.add(link)
     bot.send_message( chatid , """⌥ Welcome to KING api bot...
-*⌥ Locks are :* `
+*⌥ Locks are :*
 > Photo
 > Video
 > Gif
@@ -107,7 +107,7 @@ def starting(m):
 > BadWords
 > Tags / Usernames
 and more...
-`
+
 _⌥ Enjoy it for free!_""" , parse_mode="Markdown" , reply_markup=markup)
 #######################################################################################################################################################################
 @bot.message_handler(commands=['ping'])
@@ -154,20 +154,20 @@ def add(m):
     groups = str(redis.sismember("groups" , "{}".format(chatid)))
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
-            bot.send_message(chatid , """➥All : `{0}`
-➥Text : `{1}`
-➥Photo : `{2}`
-➥Sticker : `{3}`
-➥Video : `{4}`
-➥Audio : `{5}`
-➥Gif : `{6}`
-➥Game : `{7}`
-➥TGServices : `{8}`
-➥Link : `{9}`
-➥Forward : `{10}`
-➥VideoNote : `{11}`
-➥Voice : `{12}`
-➥Document : `{13}`""".format(lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid)) , parse_mode="Markdown")
+            bot.send_message(chatid , """➥All : {}
+➥Text : {}
+➥Photo : {}
+➥Sticker : {}
+➥Video : {}
+➥Audio : {}
+➥Gif : {}
+➥Game : {}
+➥TGServices : {}
+➥Link : {}
+➥Forward : {}
+➥VideoNote : {}
+➥Voice : {}
+➥Document : {}""".format(lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid),lockphoto(chatid)) , parse_mode="Markdown")
     else:
         bot.send_message(chatid , "*⌥ You are not admin or chat is not a supergroup!*" , parse_mode="Markdown")
 #######################################################################################################################################################################
@@ -180,10 +180,10 @@ def lphoto(m):
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
             if lockphoto(chatid)=="LOCKED":
-                bot.send_message(chatid , "`⌥ Lock photo is already enabled!`" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo is already enabled!" , "markdown")
             else:
                 redis.sadd("photo" , chatid)
-                bot.send_message(chatid , "`⌥ Lock photo enabled!`" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo enabled!" , "markdown")
 #######################################################################################################################################################################
 @bot.message_handler(commands=['uphoto'])
 def lphoto(m):
@@ -194,10 +194,10 @@ def lphoto(m):
     if (userid in sudos or bot.get_chat_member(chatid , userid).status!="member") and chat=="supergroup":
         if groups=="True":
             if lockphoto(chatid)=="UNLOCKED":
-                bot.send_message(chatid , "`⌥ Lock photo is already disabled!`" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo is already disabled!" , "markdown")
             else:
                 redis.srem("photo" , chatid)
-                bot.send_message(chatid , "`⌥ Lock photo disabled!`" , "markdown")
+                bot.send_message(chatid , "⌥ Lock photo disabled!" , "markdown")
 #######################################################################################################################################################################
 #######################################################################################################################################################################
 #######################################################################################################################################################################
